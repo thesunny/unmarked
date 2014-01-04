@@ -16,4 +16,7 @@ group :development, :test do
   gem 'jasminerice'
   gem 'jquery-rails'
   gem 'guard-jasmine'
+  gem 'coffee-script-source', '~> 1.5.0'
+  # gem 'coffee-rails-source-maps'
 end
+

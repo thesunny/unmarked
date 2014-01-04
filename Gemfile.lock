@@ -30,9 +30,10 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.5.0)
     daemons (1.1.9)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.2)
     ffi (1.9.3-x86-mingw32)
@@ -68,6 +69,10 @@ GEM
     lumberjack (1.0.4)
     method_source (0.8.2)
     multi_json (1.8.2)
+    pry (0.9.12.4)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     pry (0.9.12.4-x86-mingw32)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -122,6 +127,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 3.2)
   coffee-script
+  coffee-script-source (~> 1.5.0)
   guard-jasmine
   jasminerice
   jquery-rails
