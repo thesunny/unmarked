@@ -1,5 +1,5 @@
-convert = (html) ->
-  (new Unmarked()).toMarkdown($("<div>#{html}</div>")[0])
+convert = (html, options) ->
+  (new Unmarked(options)).toMarkdown($("<div>#{html}</div>")[0])
 
 p = (text) ->
   console.log text
@@ -124,11 +124,23 @@ describe "Unmarked", ->
     s = convert """
       on<br>its<br>
       own<br>line
-    """
+    """, {gfm: false}
     expect(s).toInclude """
       on  
       its  
       own  
+      line
+    """
+  
+  it "handles br using no spaces at end of line in Github Flavored Markdown mode", ->
+    s = convert """
+      on<br>its<br>
+      own<br>line
+    """
+    expect(s).toInclude """
+      on
+      its
+      own
       line
     """
   
@@ -237,3 +249,59 @@ describe "Unmarked", ->
   it "creates a jQuery plugin", ->
     s = $("<h1>Heading</h1>").unmark();
     expect(s).toEqual("# Heading")
+
+  it "converts table to text with GFM", ->
+    s = convert """
+      before
+      <table>
+        <tr>
+          <th>head</th>
+          <th>head</th>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>data</td>
+        </tr>
+      </table>
+      after
+    """
+    expect(s).toInclude """
+      before 
+
+      |head| head| 
+      |data| data| 
+
+      after
+    """
+
+  it "converts table to text in non GFM", ->
+    s = convert """
+      before
+      <table>
+        <tr>
+          <th>head</th>
+          <th>head</th>
+        <tr>
+        <tr>
+          <td>data</td>
+          <td>data</td>
+        </tr>
+      </table>
+      after
+    """, {tables: false}
+    expect(s).toInclude """
+      before 
+
+      head head data data  
+
+      after
+    """
+
+  it "converts checkboxes", ->
+    # s = convert """
+    #   before
+    #   <ul>
+    #   </ul>
+    #   <input type="checkbox"> This is some text here
+    #   after
+    # """
