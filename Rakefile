@@ -35,6 +35,11 @@ task :server do
   # sh "bundle exec rackup -p 3000 -e development"
 end
 
+desc "Compile to javascript"
+task :compile do
+  sh "coffee -bcl -o javascripts coffeescripts"
+end
+
 # # Puts the Javascripts together. It doesn't do anything with
 # # respect to the original .coffee files.
 # desc "Build snapeditor.js"
